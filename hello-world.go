@@ -18,7 +18,16 @@ func genEven(){
 	}
 }
 
+func isEven(x int) bool {
+	if(x%2)==0{ 
+		return true
+	
+	}else{
+		return false
+	}
+}
+
 func main(){
-	genEven()
+	fmt.Println(isEven(3))
 
 }
