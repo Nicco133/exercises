@@ -4,18 +4,20 @@ import (
 		"fmt"
 		"math/rand"
 		"time"
+		"net/http"
 )
 
-func genEven(){
+func genEven() int{
 	rand.Seed(time.Now().UnixNano())
 	n:=1
 	for i:=0;i<1;{
 		n=rand.Int()
-		fmt.Println(n)
 		if (n%2)==0 {
 		i=1
+		
 		}
 	}
+	return n
 }
 
 func isEven(x int) bool {
@@ -28,6 +30,10 @@ func isEven(x int) bool {
 }
 
 func main(){
-	fmt.Println(isEven(3))
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "%d", genEven())
+	})
+
+	http.ListenAndServe(":8090", nil)
 
 }
