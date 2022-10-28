@@ -4,6 +4,7 @@ import (
 		"fmt"
 		"math/rand"
 		"time"
+		"io"
 		"net/http"
 )
 
@@ -31,9 +32,13 @@ func isEven(x int) bool {
 
 func main(){
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "%d", genEven())
+		name,_:= io.ReadAll(r.Body)
+		
+		fmt.Fprintf(w, "\nHi %s!", name)
 	})
 
 	http.ListenAndServe(":8090", nil)
 
 }
+
+
